@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_navigation/screens/second_page.dart';
+import 'package:flutter_navigation/navigator/app_navigator.dart';
+import 'package:get_it/get_it.dart';
 
 class FirstPage extends StatefulWidget {
   FirstPage({super.key});
 
   String secondPageResult = "";
+
+  final AppNavigator navigator = GetIt.I<AppNavigator>();
 
   @override
   State<FirstPage> createState() => _FirstPageState();
@@ -22,12 +25,11 @@ class _FirstPageState extends State<FirstPage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text("First Page"),
             ElevatedButton(
               onPressed: () async {
-                final result = await Navigator.push<String>(
-                  context,
-                  MaterialPageRoute(builder: (context) => SecondPage()),
+                final result = await widget.navigator.navigateToScreen(
+                  clearBackStack: false,
+                  path: '/second',
                 );
 
                 if (result != null) {

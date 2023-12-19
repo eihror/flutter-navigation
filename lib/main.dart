@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_navigation/screens/first_page.dart';
+import 'package:flutter_navigation/di/di.dart';
+import 'package:flutter_navigation/route/routes.dart';
+import 'package:get_it/get_it.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  DI.initializeDependencies();
+
   runApp(const MyApp());
 }
 
@@ -17,7 +22,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: FirstPage(),
+      navigatorKey: GetIt.I<GlobalKey<NavigatorState>>(),
+      initialRoute: '/first',
+      onGenerateRoute: Pages.generateRoutes,
     );
   }
 }
