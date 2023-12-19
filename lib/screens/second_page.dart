@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_navigation/navigator/app_navigator.dart';
+import 'package:get_it/get_it.dart';
 
 class SecondPage extends StatefulWidget {
   SecondPage({super.key});
 
   String text = "";
+
+  final AppNavigator navigator = GetIt.I<AppNavigator>();
 
   @override
   State<SecondPage> createState() => _SecondPageState();
@@ -38,7 +42,7 @@ class _SecondPageState extends State<SecondPage> {
             ElevatedButton(
               onPressed: (widget.text.isNotEmpty)
                   ? () {
-                      Navigator.pop<String>(context, widget.text);
+                      widget.navigator.pop<String>(result: widget.text);
                     }
                   : null,
               child: const Text("Go Back with data"),
