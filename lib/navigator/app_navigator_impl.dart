@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_navigation/navigator/app_navigator.dart';
 
 class AppNavigatorImpl extends AppNavigator {
-
   AppNavigatorImpl({
     required this.navigatorKey,
   });
@@ -19,7 +18,7 @@ class AppNavigatorImpl extends AppNavigator {
   }) {
     return navigatorKey.currentState?.pushNamedAndRemoveUntil<T>(
       path,
-          (_) => !clearBackStack,
+      (_) => !clearBackStack,
       arguments: arguments,
     );
   }

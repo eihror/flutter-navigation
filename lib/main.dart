@@ -23,7 +23,6 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       navigatorKey: GetIt.I<GlobalKey<NavigatorState>>(),
-      initialRoute: '/first',
       onGenerateRoute: Pages.generateRoutes,
     );
   }
