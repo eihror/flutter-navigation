@@ -1,27 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_navigation/screens/first_page.dart';
 import 'package:flutter_navigation/screens/second_page.dart';
+import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 
 class Pages {
-  static Route<dynamic> generateRoutes(RouteSettings settings) {
-    if (settings.name != null) {
-      switch (settings.name) {
-        case '/first':
-          return MaterialPageRoute<void>(
-            builder: (_) => FirstPage(),
-            settings: settings,
-          );
-        case '/second':
-          return MaterialPageRoute<void>(
-            builder: (_) => SecondPage(),
-            settings: settings,
-          );
-      }
-    }
-
-    return MaterialPageRoute<void>(
-      builder: (_) => FirstPage(),
-      settings: settings,
-    );
-  }
+  static GoRouter router = GoRouter(
+    navigatorKey: GetIt.I<GlobalKey<NavigatorState>>(),
+    routes: [
+      GoRoute(
+        path: "/",
+        name: "first_screen",
+        builder: (context, state) => FirstPage(),
+      ),
+      GoRoute(
+        path: "/second",
+        name: "second_screen",
+        builder: (context, state) => SecondPage(),
+      ),
+    ],
+  );
 }

@@ -16,7 +16,6 @@ class FirstPage extends StatefulWidget {
 class _FirstPageState extends State<FirstPage> {
   @override
   Widget build(BuildContext context) {
-    print("CREATE FIRST PAGE");
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -29,10 +28,8 @@ class _FirstPageState extends State<FirstPage> {
           children: [
             ElevatedButton(
               onPressed: () async {
-                final result = await widget.navigator.navigateToScreen(
-                  clearBackStack: false,
-                  path: '/second',
-                );
+                final result = await widget.navigator
+                    .navigateToScreen(name: "second_screen");
 
                 if (result != null) {
                   setState(() {
