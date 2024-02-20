@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_navigation/navigator/app_navigator.dart';
 import 'package:get_it/get_it.dart';
+import 'package:signals/signals_flutter.dart';
 
 class FirstPage extends StatefulWidget {
   FirstPage({super.key});
 
-  String secondPageResult = "";
 
   final AppNavigator navigator = GetIt.I<AppNavigator>();
 
@@ -14,6 +14,9 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
+
+  final secondPageResult = signal("");
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,19 +35,21 @@ class _FirstPageState extends State<FirstPage> {
                     .navigateToScreen(name: "second_screen");
 
                 if (result != null) {
-                  setState(() {
-                    widget.secondPageResult = result;
-                  });
+                    secondPageResult.value = result;
                 }
               },
               child: const Text("Go To Second Screen"),
             ),
-            Visibility(
-              visible: widget.secondPageResult.isNotEmpty,
-              child: Text(
-                "Second Screen result is: ${widget.secondPageResult}",
-              ),
-            ),
+            Watch((context) {
+              final result = secondPageResult.watch(context);
+              return Visibility(
+                visible: result.isNotEmpty,
+                child: Text(
+                  "Second Screen result is: $result",
+                ),
+              );
+            })
+
           ],
         ),
       ),
